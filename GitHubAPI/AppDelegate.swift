@@ -14,9 +14,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+       
         // Override point for customization after application launch.
+        
+        /*
+         Since there's two version of objects around, the persistent objects, and the
+         in-memory objects, they can get out of sync, or change in different ways.
+         In the model, the login attribute must be unique.
+         But, another Entity could be created with the same login. When this Entity is saved,
+         (by saving the context) an error will be thrown, but that Entity is still in memory and the
+         NSFetchedResultsController may have a copy.
+         This merge policy means that persistent Entities "win" if there's a conflict,
+        instead of the in-memory entities.
+        */
+        persistentContainer.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        
+        let navController = window!.rootViewController as! UINavigationController
+        let repoTableViewController = navController.viewControllers.first as! RepoTableViewController
+        repoTableViewController.managedObjectContext = persistentContainer.viewContext
+        
         return true
     }
 
