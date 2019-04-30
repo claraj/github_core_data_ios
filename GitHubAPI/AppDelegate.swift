@@ -20,14 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /*
          Since there's two version of objects around, the persistent objects, and the
-         in-memory objects, they can get out of sync, or change in different ways.
+         in-memory objects, they can get out of sync, or change in different ways. Which version should the app use?
+         
          In the model, the login attribute must be unique.
-         But, another Entity could be created with the same login. When this Entity is saved,
-         (by saving the context) an error will be thrown, but that Entity is still in memory and the
+         
+         But, another Entity could be created with the same login, for example, by searching for the same login twice.
+         When this Entity is saved (by saving the context) an error will be thrown, but that Entity is still in memory and the
          NSFetchedResultsController may have a copy.
-         This merge policy means that persistent Entities "win" if there's a conflict,
-        instead of the in-memory entities.
-        */
+
+         This merge policy means that persistent Entities "win" if there's a conflict, instead of the in-memory entities.
+         */
+        
         persistentContainer.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         
         let navController = window!.rootViewController as! UINavigationController
