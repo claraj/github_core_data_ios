@@ -22,3 +22,8 @@ But, with NSManagedResultsController there may be an in-memory and persistent st
 
 See comment in AppDelegate.swift didFinishLaunchingWithOptions for the fix. 
 
+### References:
+
+- Unique constraints on an attribute https://stackoverflow.com/questions/21130427/how-to-add-unique-constraints-for-some-fields-in-core-data
+- Create NSManagedObject subclasses https://developer.apple.com/library/archive/qa/qa1952/_index.html
+- Decodable NSManagedObjects https://stackoverflow.com/a/46917019
